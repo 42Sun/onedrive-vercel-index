@@ -41,7 +41,7 @@ module.exports = {
   // the directories in which you have .password set. Check the documentation for details.
   protectedRoutes: [
     "/bt",
-    "/share"
+    "/share",
   ],
 
   // [OPTIONAL] Use "" here if you want to remove this email address from the nav bar.
@@ -54,7 +54,7 @@ module.exports = {
     {
       name: 'GitHub',
       link: 'https://github.com/spencerwooo/onedrive-vercel-index',
-    }
+    },
   ],
 
   // This is a day.js-style datetime format string to format datetimes in the app. Ref to
