@@ -8,7 +8,6 @@ import { useTranslation } from 'next-i18next'
 
 import { getBaseUrl } from '../utils/getBaseUrl'
 import { formatModifiedDateTime } from '../utils/fileDetails'
-import { getReadablePath } from '../utils/getReadablePath'
 import { Checkbox, ChildIcon, ChildName, Downloading } from './FileListing'
 import { getStoredToken } from '../utils/protectedRouteHandler'
 
@@ -46,7 +45,7 @@ const GridItem = ({ c, path }: { c: OdFolderChildren; path: string }) => {
         <span className="w-5 flex-shrink-0 text-center">
           <ChildIcon child={c} />
         </span>
-        <ChildName name={c.name} />
+        <ChildName name={c.name} folder={Boolean(c.folder)} />
       </div>
       <div className="truncate text-center font-mono text-xs text-gray-700 dark:text-gray-500">
         {formatModifiedDateTime(c.lastModifiedDateTime)}
@@ -115,7 +114,7 @@ const FolderGridLayout = ({
                     title={t('Copy folder permalink')}
                     className="cursor-pointer rounded px-1.5 py-1 hover:bg-gray-300 dark:hover:bg-gray-600"
                     onClick={() => {
-                      clipboard.copy(`${getBaseUrl()}${getReadablePath(getItemPath(c.name))}`)
+                      clipboard.copy(`${getBaseUrl()}${getItemPath(c.name)}`)
                       toast(t('Copied folder permalink.'), { icon: '👌' })
                     }}
                   >
@@ -140,7 +139,7 @@ const FolderGridLayout = ({
                     className="cursor-pointer rounded px-1.5 py-1 hover:bg-gray-300 dark:hover:bg-gray-600"
                     onClick={() => {
                       clipboard.copy(
-                        `${getBaseUrl()}/api/raw/?path=${getReadablePath(getItemPath(c.name))}${
+                        `${getBaseUrl()}/api/raw/?path=${getItemPath(c.name)}${
                           hashedToken ? `&odpt=${hashedToken}` : ''
                         }`
                       )
@@ -152,7 +151,7 @@ const FolderGridLayout = ({
                   <a
                     title={t('Download file')}
                     className="cursor-pointer rounded px-1.5 py-1 hover:bg-gray-300 dark:hover:bg-gray-600"
-                    href={`${getBaseUrl()}/api/raw/?path=${getReadablePath(getItemPath(c.name))}${
+                    href={`${getBaseUrl()}/api/raw/?path=${getItemPath(c.name)}${
                       hashedToken ? `&odpt=${hashedToken}` : ''
                     }`}
                   >
